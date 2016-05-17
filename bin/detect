@@ -1,4 +1,9 @@
 #!/usr/bin/env bash
 # bin/detect <build-dir>
 
-echo "Oracle"
+if [ -f $1/package.json ]; then
+  echo "Node.js with OracleDB"
+  exit 0
+fi
+
+exit 1
