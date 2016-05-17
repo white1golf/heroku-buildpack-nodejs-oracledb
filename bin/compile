@@ -27,7 +27,7 @@ fi
 unzip -qq $CACHE_DIR/$BASIC_FILENAME -d $ORACLE_DIR
 unzip -qq $CACHE_DIR/$SDK_FILENAME -d $ORACLE_DIR
 
-ln -s libclntsh.so.12.1 $INSTANTCLIENT_DIR/libclntsh.so;;
+ln -s libclntsh.so.12.1 $INSTANTCLIENT_DIR/libclntsh.so
 
 echo $INSTANTCLIENT_DIR
 
