@@ -1,13 +1,14 @@
 #!/usr/bin/env bash
 # bin/compile <build-dir> <cache-dir> <env-dir>
 
+THIS_DIR=`pwd`
 BUILD_DIR=$1
 CACHE_DIR=$2
 ENV_DIR=$3
 
 VENDOR_DIR=$BUILD_DIR/vendor
 ORACLE_DIR=$VENDOR_DIR/oracle
-LIB_DIR=$ORACLE_DIR/lib
+INSTANTCLIENT_DIR=$ORACLE_DIR/instantclient_12_1
 mkdir -p $ORACLE_DIR
 
 BASIC_FILENAME=instantclient-basic-linux.x64-12.1.0.2.0.zip
@@ -26,6 +27,13 @@ fi
 unzip -qq $CACHE_DIR/$BASIC_FILENAME -d $ORACLE_DIR
 unzip -qq $CACHE_DIR/$SDK_FILENAME -d $ORACLE_DIR
 
-mv $ORACLE_DIR/instantclient_12_1 $LIB_DIR
+ln -s libclntsh.so.12.1 $INSTANTCLIENT_DIR/libclntsh.so;;
 
-ln -s libclntsh.so.12.1 $LIB_DIR/libclntsh.so
+echo $INSTANTCLIENT_DIR
+
+export OCI_LIB_DIR=$INSTANTCLIENT_DIR
+export OCI_INC_DIR=$INSTANTCLIENT_DIR/sdk/include
+
+cd $BUILD_DIR
+npm install oracledb
+cd $THIS_DIR
