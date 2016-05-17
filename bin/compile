@@ -9,12 +9,12 @@ ENV_DIR=$3
 VENDOR_DIR=$BUILD_DIR/vendor
 ORACLE_DIR=$VENDOR_DIR/oracle
 INSTANTCLIENT_DIR=$ORACLE_DIR/instantclient_12_1
-mkdir -p $ORACLE_DIR
+PROFILE_D_DIR=$BUILD_DIR/.profile.d
 
 BASIC_FILENAME=instantclient-basic-linux.x64-12.1.0.2.0.zip
 SDK_FILENAME=instantclient-sdk-linux.x64-12.1.0.2.0.zip
 
-MIRROR=http://michaelbuhler.com/
+MIRROR=http://michaelbuhler.com
 
 if [ ! -f $CACHE_DIR/$BASIC_FILENAME ]; then
     curl -s -o $CACHE_DIR/$BASIC_FILENAME $MIRROR/$BASIC_FILENAME
@@ -24,12 +24,11 @@ if [ ! -f $CACHE_DIR/$SDK_FILENAME ]; then
     curl -s -o $CACHE_DIR/$SDK_FILENAME $MIRROR/$SDK_FILENAME
 fi
 
+mkdir -p $ORACLE_DIR
 unzip -qq $CACHE_DIR/$BASIC_FILENAME -d $ORACLE_DIR
 unzip -qq $CACHE_DIR/$SDK_FILENAME -d $ORACLE_DIR
 
 ln -s libclntsh.so.12.1 $INSTANTCLIENT_DIR/libclntsh.so
-
-echo $INSTANTCLIENT_DIR
 
 export OCI_LIB_DIR=$INSTANTCLIENT_DIR
 export OCI_INC_DIR=$INSTANTCLIENT_DIR/sdk/include
@@ -37,3 +36,9 @@ export OCI_INC_DIR=$INSTANTCLIENT_DIR/sdk/include
 cd $BUILD_DIR
 npm install oracledb
 cd $THIS_DIR
+
+mkdir -p $PROFILE_D_DIR
+cat << EOF > $PROFILE_D_DIR/oracle.sh
+#!/usr/bin/env bash
+export LD_LIBRARY_PATH="\$LD_LIBRARY_PATH:$HOME/vendor/oracle/instantclient_12_1"
+EOF
