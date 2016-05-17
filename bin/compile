@@ -5,10 +5,10 @@ BUILD_DIR=$1
 CACHE_DIR=$2
 ENV_DIR=$3
 
-VENDOR_DIR=$BUILD_DIR/vendor/oracle
-mkdir -p $VENDOR_DIR
-
-INSTANTCLIENT_DIR=$VENDOR_DIR/instantclient_12_1
+VENDOR_DIR=$BUILD_DIR/vendor
+ORACLE_DIR=$VENDOR_DIR/oracle
+LIB_DIR=$ORACLE_DIR/lib
+mkdir -p $ORACLE_DIR
 
 BASIC_FILENAME=instantclient-basic-linux.x64-12.1.0.2.0.zip
 SDK_FILENAME=instantclient-sdk-linux.x64-12.1.0.2.0.zip
@@ -23,10 +23,9 @@ if [ ! -f $CACHE_DIR/$SDK_FILENAME ]; then
     curl -s -o $CACHE_DIR/$SDK_FILENAME $MIRROR/$SDK_FILENAME
 fi
 
-unzip -qq $CACHE_DIR/$BASIC_FILENAME -d $VENDOR_DIR
-unzip -qq $CACHE_DIR/$SDK_FILENAME -d $VENDOR_DIR
+unzip -qq $CACHE_DIR/$BASIC_FILENAME -d $ORACLE_DIR
+unzip -qq $CACHE_DIR/$SDK_FILENAME -d $ORACLE_DIR
 
-ln -s libclntsh.so.12.1 $INSTANTCLIENT_DIR/libclntsh.so
+mv $ORACLE_DIR/instantclient_12_1 $LIB_DIR
 
-export OCI_LIB_DIR=$INSTANTCLIENT_DIR
-export OCI_INC_DIR=$INSTANTCLIENT_DIR/sdk/include
+ln -s libclntsh.so.12.1 $LIB_DIR/libclntsh.so

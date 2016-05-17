@@ -15,6 +15,3 @@ rm -fr $BUILD_DIR/*
 rm -fr $ENV_DIR/*
 
 $TEST_DIR/../bin/compile $BUILD_DIR $CACHE_DIR $ENV_DIR
-
-echo export OCI_LIB_DIR=$OCI_LIB_DIR
-echo export OCI_INC_DIR=$OCI_INC_DIR
