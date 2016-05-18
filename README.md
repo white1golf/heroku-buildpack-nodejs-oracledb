@@ -4,23 +4,22 @@ Automatically download and configure [oracle/node-oracledb](https://github.com/o
 
 ## oracledb
 
-Remove the dependency on `oracledb` from your `package.json`. [heroku-buildpack-nodejs-oracledb](https://github.com/MichaelBuhler/heroku-buildpack-nodejs-oracledb) will install it after th Oracle Instant Client libraries and environment variables have been set.
+Remove the dependency on `oracledb` from your `package.json`. This buildpack will install it after the Oracle Instant Client libraries have been downloaded and proper environment variables have been set.
 
 ## heroku-buildpack-apt
 
-The Oracle Instant Client libraries depend on other libraries which are not loaded into the Heroku slug by default. We will use Heroku's [heroku-buildpack-apt](https://github.com/heroku/heroku-buildpack-apt) to download these Debian packages when the slug is built.
+The Oracle Instant Client libraries depends on a shared library (`libaio`) which is not loaded into the Heroku's Cedar14 Ubuntu by default. We will use Heroku's [heroku-buildpack-apt](https://github.com/heroku/heroku-buildpack-apt) to download and install this library at build time.
 
-Add heroku-buildpack-apt buildpack to your app:
+Use the [Heroku CLI](https://toolbelt.heroku.com/) to add the `heroku-buildpack-apt` buildpack to your app:
 
-    $ heroku buildpacks:add https://github.com/heroku/heroku-buildpack-apt.git -a APP_NAME
+    $ heroku buildpacks:add https://github.com/heroku/heroku-buildpack-apt.git [ -a APP_NAME ]
 
-Add `Aptfile` to the root of your source code with these contents:
+Add a file called `Aptfile` to the root of your source code with these contents:
 
     libaio1
-    libaio-dev
 
 ## heroku-buildpack-nodejs-oracledb
 
-Add heroku-buildpack-nodejs-oracledb buildpack to your app:
+Use the [Heroku CLI](https://toolbelt.heroku.com/) to add the `heroku-buildpack-nodejs-oracledb` buildpack to your app:
 
-    $ heroku buildpacks:add https://github.com/MichaelBuhler/heroku-buildpack-nodejs-oracledb.git -a APP_NAME
+    $ heroku buildpacks:add https://github.com/MichaelBuhler/heroku-buildpack-nodejs-oracledb.git [ -a APP_NAME ]
