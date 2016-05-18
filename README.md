@@ -8,7 +8,7 @@ Remove the dependency on `oracledb` from your `package.json`. This buildpack wil
 
 ## heroku-buildpack-apt
 
-The Oracle Instant Client libraries depends on a shared library (`libaio`) which is not loaded into the Heroku's Cedar14 Ubuntu by default. We will use Heroku's [heroku-buildpack-apt](https://github.com/heroku/heroku-buildpack-apt) to download and install this library at build time.
+The Oracle Instant Client libraries depends on a shared library (`libaio`) which is not installed on Heroku's Cedar 14 Ubuntu image by default. We will use Heroku's [heroku-buildpack-apt](https://github.com/heroku/heroku-buildpack-apt) to download and install this library at build time.
 
 Use the [Heroku CLI](https://toolbelt.heroku.com/) to add the `heroku-buildpack-apt` buildpack to your app:
 
