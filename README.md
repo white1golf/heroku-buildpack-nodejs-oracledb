@@ -22,4 +22,4 @@ Add a file called `Aptfile` to the root of your source code with these contents:
 
 Use the [Heroku CLI](https://toolbelt.heroku.com/) to add the `heroku-buildpack-nodejs-oracledb` buildpack to your app:
 
-    $ heroku buildpacks:add https://github.com/MichaelBuhler/heroku-buildpack-nodejs-oracledb.git [ -a APP_NAME ]
+    $ heroku buildpacks:add https://github.com/pupostd/heroku-buildpack-nodejs-oracledb.git [ -a APP_NAME ]
