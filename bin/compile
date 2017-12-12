@@ -11,7 +11,7 @@ indent() {
 
 VENDOR_DIR=$BUILD_DIR/vendor
 ORACLE_DIR=$VENDOR_DIR/oracle
-INSTANTCLIENT_DIR=$ORACLE_DIR/instantclient_12_1
+INSTANTCLIENT_DIR=$ORACLE_DIR/instantclient_12_2
 PROFILE_D_DIR=$BUILD_DIR/.profile.d
 
 BASIC_FILENAME=instantclient-basic-linux.x64-12.2.0.1.0.zip
