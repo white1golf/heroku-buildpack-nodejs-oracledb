@@ -14,19 +14,20 @@ ORACLE_DIR=$VENDOR_DIR/oracle
 INSTANTCLIENT_DIR=$ORACLE_DIR/instantclient_12_1
 PROFILE_D_DIR=$BUILD_DIR/.profile.d
 
-BASIC_FILENAME=instantclient-basic-linux.x64-12.1.0.2.0.zip
-SDK_FILENAME=instantclient-sdk-linux.x64-12.1.0.2.0.zip
+BASIC_FILENAME=instantclient-basic-linux.x64-12.2.0.1.0.zip
+SDK_FILENAME=instantclient-sdk-linux.x64-12.2.0.1.0.zip
 
-MIRROR=http://michaelbuhler.com
+MIRROR_BASIC=https://www.dropbox.com/s/sn4tdjnsckkczuu/instantclient-basic-linux.x64-12.2.0.1.0.zip?dl=0
+MIRROR_SDK=https://www.dropbox.com/s/98bab146vtm20uv/instantclient-sdk-linux.x64-12.2.0.1.0.zip?dl=0
 
 if [ ! -f $CACHE_DIR/$BASIC_FILENAME ]; then
     indent "Downloading $BASIC_FILENAME..."
-    curl -# -o $CACHE_DIR/$BASIC_FILENAME $MIRROR/$BASIC_FILENAME
+    wget -O $CACHE_DIR/$BASIC_FILENAME $MIRROR_BASIC
 fi
 
 if [ ! -f $CACHE_DIR/$SDK_FILENAME ]; then
     indent "Downloading $SDK_FILENAME..."
-    curl -# -o $CACHE_DIR/$SDK_FILENAME $MIRROR/$SDK_FILENAME
+    wget -O $CACHE_DIR/$SDK_FILENAME $MIRROR_SDK
 fi
 
 mkdir -p $ORACLE_DIR
