@@ -42,12 +42,6 @@ ln -s libclntsh.so.12.1 $INSTANTCLIENT_DIR/libclntsh.so
 export OCI_LIB_DIR=$INSTANTCLIENT_DIR
 export OCI_INC_DIR=$INSTANTCLIENT_DIR/sdk/include
 
-indent "Installing oracledb from npm..."
-THIS_DIR=`pwd`
-cd $BUILD_DIR
-npm install oracledb
-cd $THIS_DIR
-
 indent "Saving environment setup script..."
 mkdir -p $PROFILE_D_DIR
 cat << EOF > $PROFILE_D_DIR/oracle.sh
